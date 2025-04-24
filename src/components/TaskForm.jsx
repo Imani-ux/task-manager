@@ -34,7 +34,7 @@ const TaskForm = ({ onAddTask }) => {
           onChange={handleChange}
           required
         />
-        <Button type="submit">Add Task</Button>
+        <Button type="submit" className="add-task-button">Add Task</Button>
       </form>
     </FormContainer>
   );

@@ -55,6 +55,10 @@ export const DeleteButton = styled.button`
   border: none;
   color: #f87171;
   cursor: pointer;
+   transition: color 0.3s ease-in-out;
+    &:hover {
+    color: darkred; 
+  }
 `;
 
 export const SearchBar = styled.div`

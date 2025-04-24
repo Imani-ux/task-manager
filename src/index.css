@@ -4,8 +4,8 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: #928dab;
+  background-color: #1f1c2c;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,11 +15,11 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #0eeabe;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #0af088;
 }
 
 body {
@@ -65,4 +65,9 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.add-task-button:hover {
+  background-color: #073cf9;
+  color: #1a1a1a; 
 }
