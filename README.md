@@ -1,39 +1,45 @@
-# Task Manager - School Management Frontend
+# 📝 Task Manager App
 
-This is the frontend of a School Management System built with React.
-
-It was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-### `npm run build`
-
-Builds the app for production in the `build` folder.\
-It optimizes the React code for best performance.
-
-## Features
-
-- Add, edit, and delete tasks
-- Track task completion
-- Filter tasks (completed/pending)
-- Clean and responsive UI
-
-## Technologies
-
-- React
-- React Router
-- CSS/Material UI
-- Context API or useState
+A simple task manager built with **React**, **Vite**, **Tailwind CSS**, and **json-server**. You can add, delete, and search through tasks — with data persisted locally using a JSON server.
 
 ---
 
-## Learn More
+## 🚀 Features
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/get
+- ✅ Add new tasks with a name and description
+- ✅ Search/filter through existing tasks
+- ✅ Delete tasks when done
+- ✅ Persistent data using `json-server`
+- ✅ Fast dev experience with Vite
+- ✅ Clean and responsive UI with Tailwind CSS
+
+---
+## 🛠️ Setup Instructions
+
+### 1. Clone the Repo
+
+```bash
+git clone git@github.com:ssamielz/task-manager.git
+cd task-manager
+npm install
+npm run dev
+
+..//
+⚙️ Tech Stack
+React (with hooks)
+
+Vite (for blazing-fast dev)
+
+Tailwind CSS
+
+json-server
+
+Axios
+
+📬 API Endpoints (via json-server)
+GET /tasks – fetch all tasks
+
+POST /tasks – add a task
+
+DELETE /tasks/:id – delete a task
+

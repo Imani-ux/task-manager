@@ -1,0 +1,6 @@
+{
+    "tasks": [
+      { "id": 1, "title": "Learn Vite", "completed": false }
+    ]
+  }
+  
