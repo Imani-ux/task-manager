@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState } from 'react';
 import TaskForm from './components/TaskForm';
 import TaskList from './components/TaskList';
@@ -26,25 +25,6 @@ function App() {
         <TaskList tasks={tasks} onDeleteTask={handleDeleteTask} />
       </div>
     </Container>
-=======
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import AllTasks from './pages/AllTasks';
-import CreateTask from './pages/CreateTask';
-
-function App() {
-  return (
-    <>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/tasks" element={<AllTasks />} />
-        <Route path="/create" element={<CreateTask />} />
-      </Routes>
-    </>
->>>>>>> 62ec26cc49834a909b3652548f49a092adde058d
   );
 }
 
