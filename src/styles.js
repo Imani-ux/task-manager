@@ -7,7 +7,10 @@ export const Container = styled.div`
 `;
 
 export const FormContainer = styled.div`
-  margin-bottom: 2rem;
+  margin-bottom: 2rem; padding: 1.5rem;
+  background-color: #2d3748;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 `;
 
 export const Title = styled.h2`
@@ -28,6 +31,15 @@ export const Button = styled.button`
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+    &:hover {
+    background-color:rgb(8, 32, 248);
+    transform: scale(1.05);
+  }
+  &:active {
+    transform: scale(0.95); 
+  }
+
 `;
 
 export const TableContainer = styled.div`
