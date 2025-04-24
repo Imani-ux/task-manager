@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -40,3 +41,24 @@
 .read-the-docs {
   color: #888;
 }
+=======
+body {
+  font-family: Arial, sans-serif;
+  margin: 1rem;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 1rem;
+}
+
+input, textarea, button {
+  display: block;
+  margin: 0.5rem 0;
+}
+>>>>>>> 62ec26cc49834a909b3652548f49a092adde058d
