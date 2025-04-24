@@ -3,7 +3,7 @@ import TaskForm from './components/TaskForm';
 import TaskList from './components/TaskList';
 import { Container } from './styles';
 import './App.css';
-import CreateTask from './components/CreateTask';
+
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -26,6 +26,8 @@ function App() {
         <TaskList tasks={tasks} onDeleteTask={handleDeleteTask} />
       </div>
     </Container>
+     
+             
     
    
   );
