@@ -4,13 +4,13 @@
       "id": "59b2",
       "title": "Going to school",
       "dueDate": "2025-01-04",
-      "completed": true
+      "completed": false
     },
     {
       "id": "9075",
       "title": "Working",
       "dueDate": "2025-10-02",
-      "completed": false
+      "completed": true
     },
     {
       "id": "ec79",
