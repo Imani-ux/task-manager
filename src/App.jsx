@@ -7,6 +7,7 @@ import './App.css';
 function App() {
   const [tasks, setTasks] = useState([]);
   const [sortBy, setSortBy] = useState('');
+  const [editingTask, setEditingTask] = useState(null);
 
   useEffect(() => {
     fetch('http://localhost:3000/tasks')
@@ -31,6 +32,27 @@ function App() {
         setTasks([...tasks, newTask]);
       })
       .catch((error) => console.error('Error adding task:', error));
+  };
+
+  const handleEditSave = (updatedTask) => {
+    fetch(`http://localhost:3000/tasks/${updatedTask.id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updatedTask),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Failed to update task');
+        }
+        return res.json();
+      })
+      .then((updatedTaskFromServer) => {
+        setTasks(tasks.map(task =>
+          task.id === updatedTaskFromServer.id ? updatedTaskFromServer : task
+        ));
+        setEditingTask(null);
+      })
+      .catch((error) => console.error('Error updating task:', error));
   };
 
   const handleToggleStatus = (id, newStatus) => {
@@ -74,6 +96,9 @@ function App() {
       case 'createdTime':
         sortedTasks.sort((a, b) => new Date(a.createdTime) - new Date(b.createdTime));
         break;
+      case 'title':
+        sortedTasks.sort((a, b) => a.title.localeCompare(b.title));
+        break;
       default:
         break;
     }
@@ -81,11 +106,24 @@ function App() {
     setSortBy(criteria);
   };
 
+  const handleEditClick = (task) => {
+    setEditingTask(task);
+  };
+
   return (
     <Container>
       <h2 className="text-white text-2xl font-bold mb-4">Task Manager</h2>
       <div className="flex justify-between items-center mb-4">
-        <TaskForm onAddTask={handleAddTask} />
+        {editingTask === null ? (
+          <TaskForm onAddTask={handleAddTask} />
+        ) : (
+          <TaskForm
+            onAddTask={handleEditSave}
+            initialTask={editingTask}
+            isEditing={true}
+            onCancelEdit={() => setEditingTask(null)}
+          />
+        )}
         <div className="flex items-center">
           <label htmlFor="sortBy" className="mr-2 text-white">Sort By:</label>
           <select id="sortBy" value={sortBy} onChange={(e) => sortTasks(e.target.value)}>
@@ -94,11 +132,17 @@ function App() {
             <option value="pending">Pending</option>
             <option value="done">Done</option>
             <option value="createdTime">Time Created</option>
+            <option value="title">Title</option>
           </select>
         </div>
       </div>
       <div className="formaandlist">
-        <TaskList tasks={tasks} onDeleteTask={handleDeleteTask} onToggleStatus={handleToggleStatus} />
+        <TaskList
+          tasks={tasks}
+          onDeleteTask={handleDeleteTask}
+          onToggleStatus={handleToggleStatus}
+          onEditTask={handleEditClick}
+        />
       </div>
     </Container>
   );
