@@ -1,27 +1,21 @@
 {
   "tasks": [
     {
-      "id": "81c7",
-      "title": "Act",
-      "dueDate": "2025-10-07",
+      "id": "59b2",
+      "title": "Going to school",
+      "dueDate": "2025-01-04",
       "completed": true
     },
     {
-      "id": "90c9",
-      "title": "Weld",
+      "id": "9075",
+      "title": "Working",
       "dueDate": "2025-10-02",
-      "completed": true
-    },
-    {
-      "id": "cac8",
-      "title": "Scream",
-      "dueDate": "2025-01-02",
       "completed": false
     },
     {
-      "id": "c570",
-      "title": "Email",
-      "dueDate": "2025-03-02",
+      "id": "ec79",
+      "title": "Welding",
+      "dueDate": "2025-10-02",
       "completed": true
     }
   ]

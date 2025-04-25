@@ -31,8 +31,6 @@ React (with hooks)
 
 Vite (for blazing-fast dev)
 
-Tailwind CSS
-
 json-server
 
 Axios
