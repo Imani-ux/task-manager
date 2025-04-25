@@ -4,11 +4,10 @@ import TaskList from './components/TaskList';
 import { Container } from './styles';
 import './App.css';
 
-
 function App() {
   const [tasks, setTasks] = useState([]);
+  const [sortBy, setSortBy] = useState('');
 
-  // Fetch tasks from db.json when component mounts
   useEffect(() => {
     fetch('http://localhost:3000/tasks')
       .then((res) => res.json())
@@ -22,12 +21,19 @@ function App() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(task),
     })
-      .then((res) => res.json())
-      .then((data) => setTasks([...tasks, data]))
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Failed to add task');
+        }
+        return res.json();
+      })
+      .then((newTask) => {
+        setTasks([...tasks, newTask]);
+      })
       .catch((error) => console.error('Error adding task:', error));
   };
 
-  const handleToggleStatus  = (id, newStatus) => {
+  const handleToggleStatus = (id, newStatus) => {
     fetch(`http://localhost:3000/tasks/${id}`, {
       method: 'PATCH',
       headers: {
@@ -52,18 +58,49 @@ function App() {
       .catch((error) => console.error('Error deleting task:', error));
   };
 
+  const sortTasks = (criteria) => {
+    let sortedTasks = [...tasks];
+
+    switch (criteria) {
+      case 'dueDate':
+        sortedTasks.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+        break;
+      case 'pending':
+        sortedTasks.sort((a, b) => (a.completed ? 1 : -1) - (b.completed ? 1 : -1));
+        break;
+      case 'done':
+        sortedTasks.sort((a, b) => (a.completed ? -1 : 1) - (b.completed ? -1 : 1));
+        break;
+      case 'createdTime':
+        sortedTasks.sort((a, b) => new Date(a.createdTime) - new Date(b.createdTime));
+        break;
+      default:
+        break;
+    }
+    setTasks(sortedTasks);
+    setSortBy(criteria);
+  };
+
   return (
     <Container>
       <h2 className="text-white text-2xl font-bold mb-4">Task Manager</h2>
-      <div className="formaandlist">
+      <div className="flex justify-between items-center mb-4">
         <TaskForm onAddTask={handleAddTask} />
-        <TaskList tasks={tasks} onDeleteTask={handleDeleteTask} onToggleStatus={handleToggleStatus}/>
+        <div className="flex items-center">
+          <label htmlFor="sortBy" className="mr-2 text-white">Sort By:</label>
+          <select id="sortBy" value={sortBy} onChange={(e) => sortTasks(e.target.value)}>
+            <option value="">-- Select --</option>
+            <option value="dueDate">Due Date</option>
+            <option value="pending">Pending</option>
+            <option value="done">Done</option>
+            <option value="createdTime">Time Created</option>
+          </select>
+        </div>
+      </div>
+      <div className="formaandlist">
+        <TaskList tasks={tasks} onDeleteTask={handleDeleteTask} onToggleStatus={handleToggleStatus} />
       </div>
     </Container>
-     
-             
-    
-   
   );
 }
 
