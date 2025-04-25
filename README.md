@@ -22,7 +22,8 @@ A simple task manager built with **React**, **Vite**, **Tailwind CSS**, and **js
 git clone git@github.com:ssamielz/task-manager.git
 cd task-manager
 npm install
-npm run dev
+npm run dev //to start app
+npm run server //to start json server
 
 ..//
 ⚙️ Tech Stack
