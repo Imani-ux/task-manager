@@ -10,4 +10,4 @@ function TaskItem({ task }) {
   );
 }
 
-export default TaskItem;
+export default TaskItem;  
