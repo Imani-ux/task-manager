@@ -16,7 +16,7 @@ A simple task manager built with **React**, **Vite**, **Tailwind CSS**, and **js
 ---
 ## 🛠️ Setup Instructions
 
-### 1. Clone the Repo
+### Clone the Repo
 
 ```bash
 git clone git@github.com:ssamielz/task-manager.git

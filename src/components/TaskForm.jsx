@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormContainer, Title, Input, Button } from '../styles';
 
 const TaskForm = ({ onAddTask }) => {
@@ -14,6 +14,7 @@ const TaskForm = ({ onAddTask }) => {
     onAddTask({ ...task, completed: false });
     setTask({ title: '', dueDate: '' });
   };
+  
 
   return (
     <FormContainer>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Table, Th, Td, DeleteButton } from '../styles';
 import { FaTrash } from 'react-icons/fa';
 
-const TaskTable = ({ tasks, onDeleteTask }) => {
+const TaskTable = ({ tasks, onDeleteTask, onToggleStatus }) => {
   return (
     <Table className='exptable'>
       <thead>
@@ -16,19 +16,30 @@ const TaskTable = ({ tasks, onDeleteTask }) => {
       </thead>
       <tbody>
         {tasks.map((task, index) => (
-          <tr key={index} style={{ color: "white" }}>
-            <Td>{index + 1}</Td>
-            <Td>{task.title}</Td>
-            <Td>{task.dueDate}</Td>
-            <Td>{task.completed ? '✅ Done' : '⏳ Pending'}</Td>
-            <Td>
-              <DeleteButton onClick={() => onDeleteTask(index)}>
-                <FaTrash />
-              </DeleteButton>
-            </Td>
-          </tr>
-        ))}
-      </tbody>
+       <tr key={task.id} style={{ color: "white" }}>
+      <Td>{index + 1}</Td>
+      <Td>{task.title}</Td>
+      <Td>{task.dueDate}</Td>
+      <Td>
+        <select
+          value={task.completed ? 'done' : 'pending'}
+          onChange={(e) =>
+            onToggleStatus(task.id, e.target.value === 'done')
+          }
+          style={{ padding: '4px', borderRadius: '4px' }}
+        >
+          <option value="pending"> Pending</option>
+          <option value="done"> Done</option>
+        </select>
+      </Td>
+      <Td>
+        <DeleteButton onClick={() => onDeleteTask(task.id)}>
+          <FaTrash />
+        </DeleteButton>
+      </Td>
+    </tr>
+  ))}
+</tbody>
     </Table>
   );
 };
