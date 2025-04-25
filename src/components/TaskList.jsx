@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import TaskTable from './TaskTable';
 import { TableContainer, SearchBar, SearchInput } from '../styles';
 
-const TaskList = ({ tasks, onDeleteTask }) => {
+const TaskList = ({ tasks, onDeleteTask, onToggleStatus }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredTasks, setFilteredTasks] = useState(tasks);
 
@@ -23,7 +23,7 @@ const TaskList = ({ tasks, onDeleteTask }) => {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </SearchBar>
-      <TaskTable tasks={filteredTasks} onDeleteTask={onDeleteTask} />
+      <TaskTable tasks={filteredTasks} onDeleteTask={onDeleteTask} onToggleStatus={onToggleStatus} />
     </TableContainer>
   );
 };
