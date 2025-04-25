@@ -1,6 +1,22 @@
 {
-    "tasks": [
-      { "id": 1, "title": "Learn Vite", "completed": false }
-    ]
-  }
-  
+  "tasks": [
+    {
+      "id": "2150",
+      "title": "Dark",
+      "dueDate": "2025-02-02",
+      "completed": false
+    },
+    {
+      "id": "4289",
+      "title": "work",
+      "dueDate": "2025-01-01",
+      "completed": false
+    },
+    {
+      "id": "81c7",
+      "title": "Act",
+      "dueDate": "2025-10-07",
+      "completed": false
+    }
+  ]
+}

@@ -16,19 +16,19 @@ const TaskTable = ({ tasks, onDeleteTask }) => {
       </thead>
       <tbody>
         {tasks.map((task, index) => (
-          <tr key={index} style={{ color: "white" }}>
-            <Td>{index + 1}</Td>
-            <Td>{task.title}</Td>
-            <Td>{task.dueDate}</Td>
-            <Td>{task.completed ? '✅ Done' : '⏳ Pending'}</Td>
-            <Td>
-              <DeleteButton onClick={() => onDeleteTask(index)}>
-                <FaTrash />
-              </DeleteButton>
-            </Td>
-          </tr>
-        ))}
-      </tbody>
+       <tr key={task.id} style={{ color: "white" }}>
+      <Td>{index + 1}</Td>
+      <Td>{task.title}</Td>
+      <Td>{task.dueDate}</Td>
+      <Td>{task.completed ? ' Done' : ' Pending'}</Td>
+      <Td>
+        <DeleteButton onClick={() => onDeleteTask(task.id)}>
+          <FaTrash />
+        </DeleteButton>
+      </Td>
+    </tr>
+  ))}
+</tbody>
     </Table>
   );
 };
