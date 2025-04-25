@@ -8,6 +8,7 @@ const AllTasks = () => {
     const storedTasks = localStorage.getItem('tasks');
     return storedTasks ? JSON.parse(storedTasks) : [];
   });
+  const [sortBy, setSortBy] = useState(''); // State for sorting criteria
 
   // Fetch from backend and update localStorage
   const fetchTasks = async () => {
@@ -58,10 +59,39 @@ const AllTasks = () => {
     }
   };
 
+  const sortTasks = (criteria) => {
+    let sortedTasks = [...tasks];
+
+    switch (criteria) {
+      case 'dueDate':
+        sortedTasks.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+        break;
+      case 'completed':
+        sortedTasks.sort((a, b) => (a.completed ? -1 : 1)); // False first, then True
+        break;
+      case 'title':
+        sortedTasks.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+      default:
+        break;
+    }
+    setTasks(sortedTasks);
+    setSortBy(criteria);
+  };
+
   return (
     <div style={{ padding: '1rem' }}>
       <h2>All Tasks</h2>
       <TaskForm onTaskAdded={handleTaskAdded} />
+      <div style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center' }}>
+        <label htmlFor="sortBy" style={{ marginRight: '0.5rem' }}>Sort By:</label>
+        <select id="sortBy" value={sortBy} onChange={(e) => sortTasks(e.target.value)}>
+          <option value="">-- Select --</option>
+          <option value="dueDate">Due Date</option>
+          <option value="completed">Status</option>
+          <option value="title">Title</option>
+        </select>
+      </div>
       <TaskList
         tasks={tasks}
         onDeleteTask={handleTaskDeleted}
