@@ -1,56 +1,67 @@
 {
   "tasks": [
     {
-      "id": "59b2",
-      "title": "Going to school",
-      "dueDate": "2025-01-04",
-      "completed": true,
-      "id": null,
-      "title": "jgky",
-      "dueDate": "2025-06-14",
-      "completed": false
-    },
-    {
-      "id": null,
+      "id": "2",
       "title": "Go to the gym",
       "dueDate": "2025-03-20",
-      "completed": false
+      "completed": false,
+      "type": "#2"
     },
     {
-      "id": null,
+      "id": "3",
       "title": "swimming",
       "dueDate": "2025-12-25",
-      "completed": false
+      "completed": false,
+      "type": "#4"
     },
     {
-      "id": null,
+      "id": "4",
       "title": "my shopping list",
       "dueDate": "2025-06-20",
-      "completed": false
+      "completed": false,
+      "type": "#1"
     },
     {
-      "id": null,
-      "title": "my",
+      "id": "5",
+      "title": "playing",
       "dueDate": "2025-04-05",
-      "completed": false
-    },
-    {
-      "id": null,
-      "title": "good",
-      "dueDate": "2025-05-05",
-      "completed": false
-    },
-    {
-      "id": "d651d162-e64e-4ca0-aa18-b40a26e033ed",
-      "title": "my new task",
-      "dueDate": "2025-05-05",
-      "completed": false
+      "completed": false,
+      "type": "#4"
     },
     {
       "id": "deccccb3-4fb2-4489-ba26-0a17d19108f0",
       "title": "my no 2 new task",
       "dueDate": "2024-04-05",
-      "completed": false
+      "completed": false,
+      "type": "#3"
+    },
+    {
+      "id": "ad28a6b7-8529-4a17-9059-9ec124475bd7",
+      "title": "Go to the grocery",
+      "dueDate": "2025-04-24",
+      "completed": false,
+      "type": "#3"
+    },
+    {
+      "id": "4f4f",
+      "title": "Shopping",
+      "dueDate": "2025-04-28",
+      "completed": false,
+      "type": "#2"
+    },
+    {
+      "id": "a014",
+      "title": "school",
+      "dueDate": "2025-04-28",
+      "completed": false,
+      "type": "#1"
+    },
+    {
+      "id": "9dd7",
+      "title": "Computer",
+      "dueDate": "2025-04-29",
+      "completed": false,
+      "type": "#3"
     }
   ]
 }
