@@ -1,8 +1,8 @@
 import React from 'react';
 import { Table, Th, Td, DeleteButton } from '../styles';
-import { FaTrash } from 'react-icons/fa';
+import { FaTrash, FaEdit } from 'react-icons/fa';
 
-const TaskTable = ({ tasks, onDeleteTask, onToggleStatus }) => {
+const TaskTable = ({ tasks, onDeleteTask, onToggleStatus, onEditTask }) => {
   return (
     <Table className='exptable'>
       <thead>
@@ -15,31 +15,47 @@ const TaskTable = ({ tasks, onDeleteTask, onToggleStatus }) => {
         </tr>
       </thead>
       <tbody>
-        {tasks.map((task, index) => (
-       <tr key={task.id} style={{ color: "white" }}>
-      <Td>{index + 1}</Td>
-      <Td>{task.title}</Td>
-      <Td>{task.dueDate}</Td>
-      <Td>
-        <select
-          value={task.completed ? 'done' : 'pending'}
-          onChange={(e) =>
-            onToggleStatus(task.id, e.target.value === 'done')
-          }
-          style={{ padding: '4px', borderRadius: '4px' }}
-        >
-          <option value="pending"> Pending</option>
-          <option value="done"> Done</option>
-        </select>
-      </Td>
-      <Td>
-        <DeleteButton onClick={() => onDeleteTask(task.id)}>
-          <FaTrash />
-        </DeleteButton>
-      </Td>
-    </tr>
-  ))}
-</tbody>
+        {tasks
+          .filter(task => task && task.id) 
+          .map((task, index) => (
+            <tr key={task.id} style={{ color: "white" }}>
+              <Td>{index + 1}</Td>
+              <Td>{task.title}</Td>
+              <Td>{task.dueDate}</Td>
+              <Td>
+                <select
+                  value={task.completed ? 'done' : 'pending'}
+                  onChange={(e) =>
+                    onToggleStatus(task.id, e.target.value === 'done')
+                  }
+                  style={{ padding: '4px', borderRadius: '4px' }}
+                >
+                  <option value="pending">Pending</option>
+                  <option value="done">Done</option>
+                </select>
+              </Td>
+              <Td>
+                <button
+                  onClick={() => onEditTask(task)}
+                  style={{
+                    background: 'blue',
+                    color: 'white',
+                    padding: '8px',
+                    borderRadius: '4px',
+                    cursor: 'pointer',
+                    marginRight: '8px',
+                    border: 'none',
+                  }}
+                >
+                  <FaEdit />
+                </button>
+                <DeleteButton onClick={() => onDeleteTask(task.id)}>
+                  <FaTrash />
+                </DeleteButton>
+              </Td>
+            </tr>
+        ))}
+      </tbody>
     </Table>
   );
 };
