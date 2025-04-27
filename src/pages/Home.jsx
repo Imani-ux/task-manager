@@ -1,28 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { getTasks } from '../api';
-import TaskList from '../components/TaskList';
+import React from "react";
+import TaskTable from "../components/TaskTable";
+import TaskArticleList from "../components/TaskArticleList";
+import { useState, useEffect } from "react";
+import { NavLink, Outlet } from "react-router-dom";
 
-function AllTasks() {
-  const [tasks, setTasks] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    getTasks()
-      .then((data) => setTasks(data))
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false));
-  }, []);
-
-  if (loading) return <p>Loading tasks...</p>;
-  if (error) return <p>Error: {error}</p>;
-
-  return (
-    <div>
-      <h2>All Tasks</h2>
-      <TaskList tasks={tasks} />
-    </div>
-  );
+function Home(){
+   
+    return (
+        <div>
+           <nav className="side-nav-bar">
+                < NavLink to='/home/importantAndUrgent'>To Do</NavLink>
+                <NavLink to='/home/important'>Important</NavLink>
+                <NavLink to='/home/urgent'>Urgent</NavLink>
+                <NavLink to='/home/others'>Others</NavLink>
+            </nav>       
+            <hr />     
+            
+            <Outlet/>
+        </div>
+    )
 }
 
-export default AllTasks;
+export default Home;
