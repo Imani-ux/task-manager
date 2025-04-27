@@ -1,63 +1,70 @@
-import React, { useState, useEffect } from 'react';
-import { FormContainer, Title, Input, Button } from '../styles';
+import React, { useContext, useState } from "react";
+import { Form } from "react-router-dom";
+import { TaskContext } from "../context/taskContext";
 
-const TaskForm = ({ onAddTask, initialTask, isEditing, onCancelEdit }) => {
-  const [task, setTask] = useState({ title: '', dueDate: '' });
+function TaskForm() {
+    const {tasks, setTasks} = useContext(TaskContext);
+    // function handling creation of a new form
+    const [newTask, setNewTask] = useState('');
+    const [deadline, setDeadline]  = useState('');
+    const [type, setType] = useState('');
 
-  useEffect(() => {
-    if (isEditing && initialTask) {
-      setTask({ title: initialTask.title, dueDate: initialTask.dueDate });
-    } else {
-      setTask({ title: '', dueDate: '' });
+    // handling the submit
+    function handleSubmit(event){
+        event.preventDefault();
+        console.log(newTask, deadline, type)
+        fetch('http://localhost:3000/tasks', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                "title": newTask,
+                "dueDate": deadline,
+                "completed": false,
+                "type": type
+            })
+        })
+        .then(res => res.json())
+        .then(data => setTasks(tasks => [...tasks, data]))
+        .catch(err => console.error(err))
     }
-  }, [isEditing, initialTask]);
+    return (
+        <div className="form-container" onSubmit={handleSubmit}>
+            <h2>Add New Task</h2>
 
-  const handleChange = (e) => {
-    setTask({ ...task, [e.target.name]: e.target.value });
-  };
+            <form  >
+                <input
+                    type="text"
+                    name="title"
+                    placeholder="Task Title"
+                    value={newTask}
+                    onChange={(event) => setNewTask(event.target.value)}
+                    required
+                />
+                <br />
+                <input
+                    type="date"
+                    name="dueDate"
+                    value={deadline}
+                    onChange={(event) => setDeadline(event.target.value)}
+                    required
+                />
+                <br />
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!task.title.trim()) return;
-    onAddTask({
-      ...task,
-      completed: isEditing ? initialTask.completed : false,
-      id: isEditing ? initialTask.id : crypto.randomUUID(), // 👈 Fixed here
-    });
-    setTask({ title: '', dueDate: '' });
-    if (isEditing) {
-      onCancelEdit();
-    }
-  };
+                <select value={type} onChange={(e) => setType(e.target.value)}>
+                    <option value="#1">Important and urgent</option>
+                    <option value="#2">Important and not urgent</option>
+                    <option value="#3">Urgent and not important</option>
+                    <option value="#4">Not Urgent and not important</option>
+                </select>
+                <button type="submit">Add Task</button>
 
-  return (
-    <FormContainer>
-      <Title style={{ color: "white" }}>{isEditing ? 'Edit Task' : 'Add New Task'}</Title>
-      <form onSubmit={handleSubmit}>
-        <Input
-          type="text"
-          name="title"
-          placeholder="Task Title"
-          value={task.title}
-          onChange={handleChange}
-          required
-        />
-        <Input
-          type="date"
-          name="dueDate"
-          value={task.dueDate}
-          onChange={handleChange}
-          required
-        />
-        <Button type="submit">{isEditing ? 'Save Task' : 'Add Task'}</Button>
-        {isEditing && (
-          <Button type="button" onClick={onCancelEdit} style={{ backgroundColor: 'gray', marginLeft: '8px' }}>
-            Cancel
-          </Button>
-        )}
-      </form>
-    </FormContainer>
-  );
-};
+            </form>
+        </div>
+    )
+}
+
 
 export default TaskForm;
