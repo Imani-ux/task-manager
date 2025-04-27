@@ -1,13 +1,30 @@
-import React from 'react';
+import React from "react";
 
-function TaskItem({ task }) {
-  return (
-    <div style={{ border: '1px solid #ccc', margin: '0.5rem 0', padding: '0.5rem' }}>
-      <h3>{task.title}</h3>
-      <p>{task.description}</p>
-      <small>Due: {task.dueDate}</small>
-    </div>
-  );
+function TaskItem({task, number}){
+    // function to handle delete
+    function handleDelete(id){
+        console.log('You want to to delete', id);
+        fetch(`http://localhost:3000/tasks/${id}`, {
+            method: 'DELETE',
+          })
+          .then(res => res.json())
+          .then(data => console.log(data))
+          .catch(err => console.error(err))         
+    }
+    
+    const date = new Date();
+    return (
+        <tr>
+            <td>{number++}</td>
+            <td>{task.title}</td>            
+            <td>{task.dueDate}</td>
+            <td>{task.completed ? "Done": "Pending"}</td>
+            <td>
+                <i className="fa fa-edit" style={{padding: '5px'}} ></i>
+                <i className="fa fa-trash" onClick={() => handleDelete(task.id)} ></i>                
+            </td>
+        </tr>
+    )
 }
 
 export default TaskItem;  
