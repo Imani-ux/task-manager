@@ -1,6 +1,6 @@
 # 📝 Task Manager App
 
-A simple task manager built with **React**, **Vite**, **Tailwind CSS**, and **json-server**. You can add, delete, and search through tasks — with data persisted locally using a JSON server.
+A simple task manager built with **React**, **Vite** and **json-server**. You can add, delete, and search through tasks — with data persisted locally using a JSON server.
 
 ---
 
