@@ -1,3 +1,4 @@
+//This is the DailyTasks component that fetches and displays tasks due today.
 import React, { useState, useEffect } from 'react';
 import { getTasks } from '../api';
 import { useNavigate } from 'react-router-dom';
