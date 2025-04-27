@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import TaskForm from './components/TaskForm';
-import TaskList from './components/TaskList';
-import { Container } from './styles';
+import React from "react";
+import Navbar from "./components/NavBar";
 import './App.css';
+import { Outlet } from "react-router-dom";
+
+function App(){
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -111,41 +112,18 @@ function App() {
   };
 
   return (
-    <Container>
-      <h2 className="text-white text-2xl font-bold mb-4">Task Manager</h2>
-      <div className="flex justify-between items-center mb-4">
-        {editingTask === null ? (
-          <TaskForm onAddTask={handleAddTask} />
-        ) : (
-          <TaskForm
-            onAddTask={handleEditSave}
-            initialTask={editingTask}
-            isEditing={true}
-            onCancelEdit={() => setEditingTask(null)}
-          />
-        )}
-        <div className="flex items-center">
-          <label htmlFor="sortBy" className="mr-2 text-white">Sort By:</label>
-          <select id="sortBy" value={sortBy} onChange={(e) => sortTasks(e.target.value)}>
-            <option value="">-- Select --</option>
-            <option value="dueDate">Due Date</option>
-            <option value="pending">Pending</option>
-            <option value="done">Done</option>
-            <option value="createdTime">Time Created</option>
-            <option value="title">Title</option>
-          </select>
-        </div>
-      </div>
-      <div className="formaandlist">
-        <TaskList
-          tasks={tasks}
-          onDeleteTask={handleDeleteTask}
-          onToggleStatus={handleToggleStatus}
-          onEditTask={handleEditClick}
-        />
-      </div>
-    </Container>
-  );
-}
+    <>
+    <header>
+      < Navbar/>
+      
+      <div>
+        <h2 className="main-heading">Task Manager</h2>
+      </div>      
+    </header>
+      <Outlet/>
 
+    </>
+  )
+}
+}
 export default App;
