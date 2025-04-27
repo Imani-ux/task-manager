@@ -1,15 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 function Navbar() {
   return (
-    <nav>
-      <ul style={{ display: 'flex', gap: '1rem' }}>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/tasks">All Tasks</Link></li>
-        <li><Link to="/create">Create Task</Link></li>
-      </ul>
+    <>
+    <nav className='main-nav-bar'>
+        <NavLink to='/eisenhower'>EisenHower</NavLink>
+      <NavLink to='/home'>Home</NavLink>
+      <NavLink to='/tasks' >Tasks</NavLink>
+      <NavLink to='/create'><i className="fa fa-plus"></i>Create</NavLink>
+
     </nav>
+        
+    </>
   );
 }
 
