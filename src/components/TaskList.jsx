@@ -1,36 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import TaskTable from './TaskTable';
-import { TableContainer, SearchBar, SearchInput } from '../styles';
+import React, { useContext, useEffect, useState } from "react";
+import TaskItem from "./TaskItem";
 
-const TaskList = ({ tasks, onDeleteTask, onToggleStatus, onEditTask }) => { 
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filteredTasks, setFilteredTasks] = useState(tasks);
+import { TaskContext } from "../context/taskContext";
 
-  useEffect(() => {
-    const filtered = tasks.filter(task =>
-      task.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredTasks(filtered);
-  }, [tasks, searchTerm]);
+function TaskList(){
+   
+   const {tasks} =useContext(TaskContext);
 
-  return (
-    <TableContainer>
-      <SearchBar>
-        <SearchInput
-          type="text"
-          placeholder="Search tasks..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </SearchBar>
-      <TaskTable
-        tasks={filteredTasks}
-        onDeleteTask={onDeleteTask}
-        onToggleStatus={onToggleStatus}
-        onEditTask={onEditTask} 
-      />
-    </TableContainer>
-  );
-};
+    if(!tasks){
+        return <p>Empty data set</p>
+    }
+    return (
+        <>
+        
+        {tasks.map((task, index) => {
+            
+            return < TaskItem key={task.id} task={task} number={index +1}/>
+})}
+        </>
+    )
+}
 
 export default TaskList;
