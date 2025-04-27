@@ -1,62 +1,88 @@
 import React from 'react';
-import { Table, Th, Td, DeleteButton } from '../styles';
-import { FaTrash, FaEdit } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import { useTasks } from '../context/TaskContext';
+import { format, parseISO } from 'date-fns';
+import '../App.css';
 
-const TaskTable = ({ tasks, onDeleteTask, onToggleStatus, onEditTask }) => {
+const EditIcon = () => <span role="img" aria-label="edit">✏️</span>;
+const DeleteIcon = () => <span role="img" aria-label="delete">🗑️</span>;
+
+const TaskTable = ({ tasks }) => {
+  const { removeTask, updateTask } = useTasks();
+  const navigate = useNavigate();
+
+  const handleDelete = async (id, title) => {
+    if (window.confirm(`Are you sure you want to delete "${title}"?`)) {
+      await removeTask(id);
+    }
+  };
+
+  const handleToggleStatus = async (task) => {
+    const newStatus = task.status === 'completed' ? 'pending' : 'completed';
+    await updateTask(task.id, { ...task, status: newStatus });
+  };
+
+  if (!tasks || tasks.length === 0) {
+    return <p className="task-list-empty">No tasks to display in table view.</p>;
+  }
+
   return (
-    <Table className='exptable'>
-      <thead>
-        <tr>
-          <Th>#</Th>
-          <Th>Title</Th>
-          <Th>Due Date</Th>
-          <Th>Status</Th>
-          <Th>Actions</Th>
-        </tr>
-      </thead>
-      <tbody>
-        {tasks
-          .filter(task => task && task.id) 
-          .map((task, index) => (
-            <tr key={task.id} style={{ color: "white" }}>
-              <Td>{index + 1}</Td>
-              <Td>{task.title}</Td>
-              <Td>{task.dueDate}</Td>
-              <Td>
-                <select
-                  value={task.completed ? 'done' : 'pending'}
-                  onChange={(e) =>
-                    onToggleStatus(task.id, e.target.value === 'done')
-                  }
-                  style={{ padding: '4px', borderRadius: '4px' }}
+    <div className="task-table-container">
+      <table className="task-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Due Date</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tasks.map((task) => (
+            <tr key={task.id} className={task.status === 'completed' ? 'completed' : ''}>
+              <td className={`task-title-table ${task.status === 'completed' ? 'completed' : ''}`}>
+                {task.title}
+              </td>
+              <td>
+                {task.dueDate ? format(parseISO(task.dueDate), 'MMM d, yyyy') : 'N/A'}
+              </td>
+              <td>
+                <span className={`priority-badge priority-${task.priority}`}>
+                  {task.priority}
+                </span>
+              </td>
+              <td>
+                <span
+                  className={`status-badge status-${task.status}`}
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => handleToggleStatus(task)}
+                  title={`Click to toggle status (current: ${task.status})`}
                 >
-                  <option value="pending">Pending</option>
-                  <option value="done">Done</option>
-                </select>
-              </Td>
-              <Td>
+                  {task.status.replace('-', ' ')}
+                </span>
+              </td>
+              <td className="actions-cell">
                 <button
-                  onClick={() => onEditTask(task)}
-                  style={{
-                    background: 'blue',
-                    color: 'white',
-                    padding: '8px',
-                    borderRadius: '4px',
-                    cursor: 'pointer',
-                    marginRight: '8px',
-                    border: 'none',
-                  }}
+                  onClick={() => navigate(`/tasks/edit/${task.id}`)}
+                  className="button-secondary button-icon"
+                  title="Edit Task"
                 >
-                  <FaEdit />
+                  <EditIcon />
                 </button>
-                <DeleteButton onClick={() => onDeleteTask(task.id)}>
-                  <FaTrash />
-                </DeleteButton>
-              </Td>
+                <button
+                  onClick={() => handleDelete(task.id, task.title)}
+                  className="button-danger button-icon"
+                  title="Delete Task"
+                >
+                  <DeleteIcon />
+                </button>
+              </td>
             </tr>
-        ))}
-      </tbody>
-    </Table>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 

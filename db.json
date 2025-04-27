@@ -47,6 +47,18 @@
       "title": "my no 2 new task",
       "dueDate": "2024-04-05",
       "completed": false
+    },
+    {
+      "id": "6fc83cfd-d4ab-45b3-874c-a4856b93f535",
+      "title": "cleaning",
+      "dueDate": "2025-04-05",
+      "completed": true
+    },
+    {
+      "id": "f522a3ee-7a73-4219-8862-98154b990321",
+      "title": "moping",
+      "dueDate": "2025-04-03",
+      "completed": false
     }
   ]
 }

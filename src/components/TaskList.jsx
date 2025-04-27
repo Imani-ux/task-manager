@@ -1,35 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import TaskTable from './TaskTable';
-import { TableContainer, SearchBar, SearchInput } from '../styles';
+import React from 'react';
+import TaskItem from './TaskItem';
+import '../App.css';
 
-const TaskList = ({ tasks, onDeleteTask, onToggleStatus, onEditTask }) => { 
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filteredTasks, setFilteredTasks] = useState(tasks);
-
-  useEffect(() => {
-    const filtered = tasks.filter(task =>
-      task.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredTasks(filtered);
-  }, [tasks, searchTerm]);
+const TaskList = ({ tasks }) => {
+  if (!tasks || tasks.length === 0) {
+    return <p className="task-list-empty">No tasks found. Try adjusting your filters or create a new task!</p>;
+  }
 
   return (
-    <TableContainer>
-      <SearchBar>
-        <SearchInput
-          type="text"
-          placeholder="Search tasks..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </SearchBar>
-      <TaskTable
-        tasks={filteredTasks}
-        onDeleteTask={onDeleteTask}
-        onToggleStatus={onToggleStatus}
-        onEditTask={onEditTask} 
-      />
-    </TableContainer>
+    <div className="task-list">
+      {tasks.map((task) => (
+        <TaskItem key={task.id} task={task} />
+      ))}
+    </div>
   );
 };
 

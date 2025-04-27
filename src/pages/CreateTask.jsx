@@ -1,28 +1,16 @@
-import React, { useState } from 'react';
+// src/pages/CreateTask.jsx
+import React from 'react';
 import TaskForm from '../components/TaskForm';
-import { addTask } from '../api';
-import { useNavigate } from 'react-router-dom';
+import '../App.css';
 
-function CreateTask() {
-  const navigate = useNavigate();
-  const [error, setError] = useState(null);
-
-  const handleAdd = async (task) => {
-    try {
-      await addTask(task);
-      navigate('/tasks');
-    } catch (err) {
-      setError(err.message);
-    }
-  };
-
+const CreateTask = () => {
   return (
-    <div>
-      <h2>Create New Task</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <TaskForm onAdd={handleAdd} />
+    <div className="page-container">
+      {/* You can add a header here if needed */}
+      {/* <h1>Create a New Task</h1> */}
+      <TaskForm />
     </div>
   );
-}
+};
 
 export default CreateTask;

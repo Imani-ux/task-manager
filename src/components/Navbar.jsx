@@ -1,16 +1,22 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
+import '../App.css'; 
 
-function Navbar() {
+const Navbar = () => {
   return (
-    <nav>
-      <ul style={{ display: 'flex', gap: '1rem' }}>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/tasks">All Tasks</Link></li>
-        <li><Link to="/create">Create Task</Link></li>
+    <nav className="navbar">
+      <Link to="/" className="navbar-brand">
+        TaskManager
+      </Link>
+      <ul className="navbar-links">
+        <li><NavLink to="/" end>Home</NavLink></li>
+        <li><NavLink to="/tasks">All Tasks</NavLink></li>
+        <li><NavLink to="/tasks/new">Create Task</NavLink></li>
+        <li><NavLink to="/tasks/daily">Daily View</NavLink></li>
+        
       </ul>
     </nav>
   );
-}
+};
 
 export default Navbar;
