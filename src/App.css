@@ -1,79 +1,124 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+body{
+  font-size: 30px;
+  font-family: sans-serif;
   text-align: center;
+  background-color: #ccc;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.main-heading{
+  margin: 5% 0 0 0;
+  padding: 10px;
+  font-size: 70px;
+  color: blue;
+  
 }
 
-
-.card {
-  padding: 2em;
+nav.main-nav-bar a{
+  padding: 5px;
+  background-color: rgb(170, 171, 245);
+  margin: 5px;
+  border-radius: 12px;
+  text-decoration: none;
 }
 
-.read-the-docs {
-  color: #888;
+nav.main-nav-bar a.active{
+  background-color: rgb(54, 57, 236);
 }
 
-
-.form {
-  padding: "20px";
-  background: "#f9f9f9";
-  border: "1px solid #ddd";
-  border-radius: "10px";
-  max-width: "400px";
-  margin: "20px auto";
+nav.main-nav-bar{
+  position: absolute;
+  top: 20px;
+  left: 10px;
 }
 
-.input {
-  width: "100%";
-  padding: "10px";
-  margin-bottom: "10px";
-  border: "1px solid #ccc";
-  border-radius: "5px";
-  font-size: "20px";
+input, select {
+  width: 70%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 20px;
 }
 
-.buttonGroup {
-  display: "flex";
-  gap: "10px";
-  justify-content: "space-between";
+.form-container{
+  background-image: url(./assets/modern-abstract-gradient-blue-background-free-vector.jpg);
+  border-radius: 10px;
+  margin: 0;
+  
 }
 
-.button {
-  flex: 1;
-  padding: "10px";
-  background-color: "#007bff";
-  color: "white";
-  border: "none";
-  border-radius: "5px";
-  font-size: "16px";
-  cursor: "pointer";
+h1, h2, h3, h4 {
+  color: rgb(5, 8, 8)
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button {
+  color: white;
+  background-color: black;
+  width: 50%;
+  height: 2.5rem;
+  font-size: 25px;  
+  margin: 10px;
+  border-radius: 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+table{
+  width: 100%;
+  background-image: url(./assets/modern-abstract-gradient-blue-background-free-vector.jpg);
+}
+
+table, th, td{
+  border: 1px solid;
+  text-align: left;
+}
+
+i:hover{
+  color: red;
+}
+
+article{
+  background-image: url(./assets/modern-abstract-gradient-blue-background-free-vector.jpg);
+  width: 400px;
+  min-height: 200px;
+  float: left;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.matrix-container{
+  background-color: rgb(3, 12, 9);
+}
+
+.matrix div.box{
+  background-color: rgb(2, 82, 55);
+  width: 300px;
+  height: 300px;
+  float: left;
+  margin: 10px;
+}
+
+section{
+  padding: 10px;
+}
+
+.side-nav-bar {
+  background-color: aqua;
+  height: 4rem;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0;
+  border-radius: 30px;
+  width: 80%;
+  margin: 0 auto;
+}
+.side-nav-bar a{
+  text-decoration: none;
+  margin: 3%;
+  font-size: 110%;
+  padding: 4px;
+  background-color: aqua;
+}
+
+.side-nav-bar a.active{
+  border-top: 2px solid blue;  
+  padding: 10px;
 }
